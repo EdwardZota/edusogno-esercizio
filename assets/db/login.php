@@ -8,21 +8,35 @@ $connection = DB::getConnection();
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$query = "SELECT * FROM `utenti` WHERE email = '$email' AND password = '$password'";
+$query = "SELECT * FROM `utenti` WHERE email = '$email'";
 
 $result = $connection->query($query);
 
 $connection->close();
 
-if($result->num_rows > 0){
-    header("location: ../../events.php");
-    exit;
+if($result->num_rows === 1){
+
+    $row = $result->fetch_assoc();
+    $user= $row['nome'];
+    $db_hashed_password = $row['password'];
+
+    if(password_verify($password,$db_hashed_password)){
+        $_SESSION['logged_in'] = true;
+        $_SESSION['logged_user'] = $user;
+        header("location: ../../index.php");
+        exit;
+    }else{
+        $_SESSION['login_error'] = "la password inserita non è valida";
+        header("Location: ../../login.php");
+        exit;
+    }
+
 }else{
     // Credenziali non valide, memorizza il messaggio di errore nella variabile di sessione
-    $_SESSION['login_error'] = "Email e/o password errati.";
+    $_SESSION['login_error'] = "l'email inserita non e valida";
 
     // Reindirizza alla pagina di login
-    header("Location: ../../index.php");
+    header("Location: ../../login.php");
     exit;
 }
 

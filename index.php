@@ -1,6 +1,18 @@
 <?php
+
     session_start();
+    
     require_once __DIR__ . './assets/db/DBConfig.php';
+    require_once __DIR__ .'./assets/db/Events.php';
+
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        header("location: ./login.php");
+        exit;
+    }else{
+        $loggedUser = $_SESSION['logged_user'];
+    }
+
+    $events = Events::getEvents();
 ?>
 
 <!DOCTYPE html>
@@ -31,31 +43,18 @@
             <img class="left-circle" src="./assets/img/left-circle.svg" alt="left-circle">
             <img class="rocket" src="./assets/img/rocket.svg" alt="rocket">
         </div>
-        <div class="loginAndRegister">
-            <h1 class="title">Hai già un'account?</h1>
-            <form action="./assets/db/login.php" method="post" id="login">
-                <?php
-                // Verifica se esiste un messaggio di errore nella variabile di sessione
-                    if (isset($_SESSION['login_error'])) {
-                        echo '<p id="login_error">' . $_SESSION['login_error'] . '</p>';
-                        // Rimuovi il messaggio di errore dalla variabile di sessione per evitare che venga visualizzato nuovamente dopo il refresh
-                        unset($_SESSION['login_error']);
-                    }
-                ?>
-                    <label for="email">Inserisci l'e-mail</label>
-                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
-
-                    <label for="password">Inserisci la password</label>
-                    <input type="password" id="password" name="password" placeholder="Scrivila qui" required>
-                    
-                    <div class="eye">
-                        <img src="./assets/img/eye.svg" alt="eye">
+        <div id="events">
+            <h1 class="title">Ciao <?php echo $loggedUser ?> ecco i tuoi eventi</h1>
+            <div id="eventsBox">
+                <?php foreach($events as $event) { ?>
+                    <div class="eventsCard">
+                        <h2><?php echo $event->nome_evento; ?></h2>
+                        <p><?php echo $event->data_evento; ?></p>
+                        <button>JOIN</button>
                     </div>
-                    
-                    <button type="submit">ACCEDI</button>
+                <?php } ?>
                 
-                <span>Non hai ancora un profilo? <a href="#">Registrati</a></span>
-            </form>
+            </div>
         </div>
         
     </main>

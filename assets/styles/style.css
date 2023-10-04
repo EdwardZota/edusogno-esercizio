@@ -114,9 +114,15 @@ form input {
     font-size: 20px;
 }
 
-form .eye {
+form .eye{
     position: absolute;
+}
+form .eye#eyeLogin{
     top: 163px;
+    right: 35px;
+}
+form .eye#eyeRegistration{
+    top: 337px;
     right: 35px;
 }
 
@@ -142,11 +148,21 @@ form span a {
     font-weight: bold;
     text-decoration: underline;
     color: #134077;
+    cursor: pointer;
+    
 }
-form #login_error {
+
+form #registration_success,form #registration_error,form #login_error {
     position: absolute;
-    color: red;
     top: 15px;
+    font-weight: bold;
+}
+
+form #login_error,form #registration_error {
+    color: red;
+}
+form #registration_success {
+    color: green;
 }
 
 /* fine card login/registrazione / inizio eventsCard */
