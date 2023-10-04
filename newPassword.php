@@ -34,32 +34,16 @@
         </div>
         <!-- Login -->
         <div class="loginAndRegister" id="loginForm">
-            <h1 class="title">Hai già un'account?</h1>
-            <form action="./assets/db/Login.php" method="post">
-                <?php
-                // Verifica se esiste un messaggio di errore nella variabile di sessione
-                    if (isset($_SESSION['login_error'])) {
-                        echo '<p id="login_error">' . $_SESSION['login_error'] . '</p>';
-                        // Rimuovi il messaggio di errore dalla variabile di sessione per evitare che venga visualizzato nuovamente dopo il refresh
-                        unset($_SESSION['login_error']);
-                    }else if(isset($_SESSION['registration_success'])){
-                        echo '<p id="registration_success">' . $_SESSION['registration_success'] . '</p>';
-                        unset($_SESSION['registration_success']);
-                    }
-                ?>
-                    <label for="email">Inserisci l'e-mail</label>
-                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
+            <h1 class="title">Nuova Password</h1>
+            <form action="./assets/db/confirmNewPassword.php" method="post">
 
-                    <label for="password">Inserisci la password</label>
+                    <label for="password">Inserisci la nuova password</label>
                     <input type="password" id="password" name="password" placeholder="Scrivila qui" required>
                     <div class="eye" id="eyeLogin">
                         <img src="./assets/img/eye.svg" alt="eye">
                     </div>
-                    <span> <a href="./forgotPassword.php">Password dimenticata?</a></span>
                     
-                    <button type="submit">ACCEDI</button>
-                
-                    <span>Non hai ancora un profilo? <a href="./registration.php">Registrati</a></span>
+                    <button type="submit">Conferma nuova password</button>
                 </form>
         </div>
     </main>

@@ -9,7 +9,6 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 $query = "SELECT * FROM `utenti` WHERE email = '$email'";
-
 $result = $connection->query($query);
 
 $connection->close();

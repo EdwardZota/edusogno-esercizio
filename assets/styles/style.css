@@ -158,10 +158,10 @@ form #registration_success,form #registration_error,form #login_error {
     font-weight: bold;
 }
 
-form #login_error,form #registration_error {
+form #login_error,form #registration_error,form #sendMailFailed,form #code_error {
     color: red;
 }
-form #registration_success {
+form #registration_success,form #sendMailSuccess {
     color: green;
 }
 
