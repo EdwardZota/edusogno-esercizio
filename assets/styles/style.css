@@ -25,6 +25,7 @@ header {
 }
 
 main{
+    position: relative;
     height: calc(100vh - 121px);
 }
 
@@ -75,17 +76,17 @@ main{
     right: 50px;
 }
 
-/* fine background */
+/* fine background / inizio card login/registrazione*/
 
 .loginAndRegister {
     width: 50%;
     margin: auto;
     position: absolute;
-    top: 15%;
+    top: 5%;
     left: 25%;
 }
 
-.formTitle {
+.title {
     text-align: center;
     margin-top: 60px;
     color: #134077;
@@ -100,6 +101,7 @@ form {
     border-radius: 18px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 form label {
     font-weight: bolder;
@@ -112,7 +114,13 @@ form input {
     font-size: 20px;
 }
 
-form button {
+form .eye {
+    position: absolute;
+    top: 163px;
+    right: 35px;
+}
+
+form button,#eventsBox button {
     background-color: #0057ff;
     color: white;
     font-size: large;
@@ -121,6 +129,7 @@ form button {
     padding: 1rem;
     margin-top: 0.5rem;
     align-items: center;
+    width: 100%;
 }
 
 form span {
@@ -134,4 +143,41 @@ form span a {
     text-decoration: underline;
     color: #134077;
 }
+form #login_error {
+    position: absolute;
+    color: red;
+    top: 15px;
+}
+
+/* fine card login/registrazione / inizio eventsCard */
+
+#events {
+    width: 100vw;
+    margin: auto;
+    position: absolute;
+    top: 5%;
+}
+
+#eventsBox {
+    width: 75%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.eventsCard {
+    width: calc((100% / 3) - 30px);
+    padding: 30px 20px;
+    margin-top: 50px;
+    background-color: white;
+    border: 1px solid #134077;
+    border-radius: 18px;
+}
+
+.eventsCard p {
+    margin: 8px 0;
+    color: #dfdfdf;
+}
+
 

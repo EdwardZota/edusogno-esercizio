@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once __DIR__ . './assets/db/DBConfig.php';
 ?>
 
@@ -31,16 +32,23 @@
             <img class="rocket" src="./assets/img/rocket.svg" alt="rocket">
         </div>
         <div class="loginAndRegister">
-            <h1 class="formTitle">Hai già un'account?</h1>
+            <h1 class="title">Hai già un'account?</h1>
             <form action="./assets/db/login.php" method="post" id="login">
-               
+                <?php
+                // Verifica se esiste un messaggio di errore nella variabile di sessione
+                    if (isset($_SESSION['login_error'])) {
+                        echo '<p id="login_error">' . $_SESSION['login_error'] . '</p>';
+                        // Rimuovi il messaggio di errore dalla variabile di sessione per evitare che venga visualizzato nuovamente dopo il refresh
+                        unset($_SESSION['login_error']);
+                    }
+                ?>
                     <label for="email">Inserisci l'e-mail</label>
                     <input type="email" id="email" name="email" placeholder="name@example.com" required>
 
                     <label for="password">Inserisci la password</label>
                     <input type="password" id="password" name="password" placeholder="Scrivila qui" required>
                     
-                    <div id="test">
+                    <div class="eye">
                         <img src="./assets/img/eye.svg" alt="eye">
                     </div>
                     
