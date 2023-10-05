@@ -92,7 +92,7 @@ main{
     color: #134077;
 }
 
-form {
+.loginAndRegister form {
     width: 70%;
     margin: 20px auto;
     padding: 40px 30px;
@@ -170,6 +170,17 @@ form #registration_success,form #sendMailSuccess,form #change_password_success {
     color: green;
 }
 
+form textarea{
+    width: 100%;
+    height: 150px;
+    padding: 10px 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+
 /* fine card login/registrazione / inizio eventsCard */
 
 #events {
@@ -180,7 +191,7 @@ form #registration_success,form #sendMailSuccess,form #change_password_success {
 }
 
 #eventsBox {
-    width: 75%;
+    width: 70%;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
@@ -190,7 +201,7 @@ form #registration_success,form #sendMailSuccess,form #change_password_success {
 .eventsCard {
     width: calc((100% / 3) - 30px);
     padding: 30px 20px;
-    margin-top: 50px;
+    margin: 50px auto;
     background-color: white;
     border: 1px solid #134077;
     border-radius: 18px;
@@ -201,4 +212,9 @@ form #registration_success,form #sendMailSuccess,form #change_password_success {
     color: #dfdfdf;
 }
 
+#createNewButton{
+    position: absolute;
+    top: 0;
+    right: 16%;
+}
 

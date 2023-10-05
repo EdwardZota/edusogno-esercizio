@@ -46,11 +46,17 @@
         <div id="events">
             <h1 class="title">Ciao <?php echo $loggedUser ?> ecco i tuoi eventi</h1>
             <div id="eventsBox">
+                <a href="./events/create.php" id="createNewButton"><button>CREATE</button></a>
                 <?php foreach($events as $event) { ?>
                     <div class="eventsCard">
                         <h2><?php echo $event->nome_evento; ?></h2>
                         <p><?php echo $event->data_evento; ?></p>
-                        <button>JOIN</button>
+                        <a href="./events/show.php?event-name=<?php echo $event->nome_evento ?>"><button>JOIN</button></a>
+                        <a href="./events/edit.php?event-name=<?php echo $event->nome_evento ?>"><button>EDIT</button></a>
+                        <form action="./assets/db/deleteEvent.php" method="post">
+                            <input type="hidden" name="event-id" value="<?php echo $event->id ?>">
+                            <button>DELETE</button></a>
+                        </form>
                     </div>
                 <?php } ?>
                 

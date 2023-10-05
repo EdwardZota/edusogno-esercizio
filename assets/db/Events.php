@@ -35,4 +35,21 @@ class Events {
 
         return $events;
     }
+
+    static public function show($eventName){
+        $connection = DB::getConnection();
+
+        $query = "SELECT * FROM `eventi` WHERE `nome_evento` = '$eventName'";
+        $result  = $connection->query($query);
+        $connection->close();
+
+        if($result->num_rows > 0){
+            $event = $result->fetch_assoc();
+        }else{
+            $event = null;
+        }
+        return $event;
+
+    }
+
 }
