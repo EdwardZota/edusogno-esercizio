@@ -17,11 +17,13 @@ if($result->num_rows === 1){
 
     $row = $result->fetch_assoc();
     $user= $row['nome'];
+    $userEmail= $row['email'];
     $db_hashed_password = $row['password'];
 
     if(password_verify($password,$db_hashed_password)){
         $_SESSION['logged_in'] = true;
         $_SESSION['logged_user'] = $user;
+        $_SESSION['userEmail'] = $userEmail;
         header("location: ../../index.php");
         exit;
     }else{

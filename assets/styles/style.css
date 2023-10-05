@@ -207,10 +207,11 @@ form textarea{
     border-radius: 18px;
 }
 
-.eventsCard p {
+.eventsCard #date {
     margin: 8px 0;
     color: #dfdfdf;
 }
+
 
 #createNewButton{
     position: absolute;

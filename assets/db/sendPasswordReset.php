@@ -25,7 +25,7 @@ if($result->num_rows === 1){
     
     ini_set("SMTP", "smtp.freesmtpservers.com");
     ini_set("smtp_port", "25"); //link per il test: https://www.wpoven.com/tools/free-smtp-server-for-testing
-    ini_set("sendmail_from", "zotaedward@gmail.com");
+    ini_set("sendmail_from", "$email");
 
     if(mail($email,$subject,$message,$headers)){
         $_SESSION['sendMailSuccess'] = 'E-mail di recupero password inviata con successo.';

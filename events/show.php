@@ -1,11 +1,19 @@
 <?php
+    session_start();
+
     require_once __DIR__ . '/../assets/db/DBConfig.php';
     require_once __DIR__ . '/../assets/db/Events.php';
 
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        header("location: ../login.php");
+        exit;
+    }
     if(isset($_GET['event-name'])){
         $eventName = $_GET['event-name'];
 
         $event = Events::show($eventName);
+        $attendeesArray = explode(',',$event['attendees']);
+
 
     }else{
         echo "<h1>Pagina non trovata. Torna alla <a href='../index.php'>pagina principale</a>.</h1>";
@@ -48,7 +56,13 @@
             <div id="eventsBox">
                     <div class="eventsCard">
                         <h2><?php echo $event['nome_evento']; ?></h2>
-                        <p><?php echo $event['data_evento']; ?></p>
+                        <p id="date"><?php echo $event['data_evento']; ?></p>
+                        <h5>Partecipanti:</h5>
+                        <?php foreach($attendeesArray as $attender){ ?>
+                            <div>
+                                <p><?php echo $attender ?></p>
+                            </div>
+                        <?php } ?>
                     </div>
             </div>
         </div>

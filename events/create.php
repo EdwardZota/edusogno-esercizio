@@ -2,6 +2,10 @@
     session_start();
     require_once __DIR__ . '/../assets/db/DBConfig.php';
 
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        header("location: ../login.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
