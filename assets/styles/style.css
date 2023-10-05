@@ -126,6 +126,11 @@ form .eye#eyeRegistration{
     right: 35px;
 }
 
+form .eye#eyeNewPassword{
+    top: 75px;
+    right: 31px;
+}
+
 form button,#eventsBox button {
     background-color: #0057ff;
     color: white;
@@ -161,7 +166,7 @@ form #registration_success,form #registration_error,form #login_error {
 form #login_error,form #registration_error,form #sendMailFailed,form #code_error {
     color: red;
 }
-form #registration_success,form #sendMailSuccess {
+form #registration_success,form #sendMailSuccess,form #change_password_success {
     color: green;
 }
 

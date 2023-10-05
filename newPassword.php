@@ -39,7 +39,7 @@
 
                     <label for="password">Inserisci la nuova password</label>
                     <input type="password" id="password" name="password" placeholder="Scrivila qui" required>
-                    <div class="eye" id="eyeLogin">
+                    <div class="eye" id="eyeNewPassword">
                         <img src="./assets/img/eye.svg" alt="eye">
                     </div>
                     

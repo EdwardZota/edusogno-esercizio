@@ -45,6 +45,9 @@
                     }else if(isset($_SESSION['registration_success'])){
                         echo '<p id="registration_success">' . $_SESSION['registration_success'] . '</p>';
                         unset($_SESSION['registration_success']);
+                    }else if(isset($_SESSION['change_password_success'])){
+                        echo '<p id="change_password_success">' . $_SESSION['change_password_success'] . '</p>';
+                        unset($_SESSION['change_password_success']);
                     }
                 ?>
                     <label for="email">Inserisci l'e-mail</label>

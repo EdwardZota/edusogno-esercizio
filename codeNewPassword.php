@@ -36,7 +36,7 @@
         <!-- codice cambio password -->
         <div class="loginAndRegister" id="changePassword">
             <h1 class="title">Conferma codice di recupero!</h1>
-            <form action="./assets/db/sendCodePasswordReset.php" method="post">
+            <form action="./assets/db/sendCodeNewPassword.php" method="post">
             <?php
                     if (isset($_SESSION['code_error'])) {
                         echo '<p id="code_error">' . $_SESSION['code_error'] . '</p>';

@@ -16,8 +16,13 @@ if($result->num_rows === 1){
     $trueCode = $row['codice_cambio_password'];
 
     if($trueCode == $code){
+
+        $query="UPDATE `utenti` SET `codice_cambio_password` = NULL WHERE `email` = '$email";
+        $connection->query($query);
+
         header("location: ../../newPassword.php");
         exit;
+        
     }else{
         $_SESSION['code_error'] = 'Codice inserito non valido.';
         header("location: ../../codeNewPassword.php");
