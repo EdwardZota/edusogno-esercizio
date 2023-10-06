@@ -38,12 +38,9 @@
             <h1 class="title">Cambio password!</h1>
             <form action="./assets/db/sendPasswordReset.php" method="post">
                 <?php
-                if (isset($_SESSION['sendMailSuccess'])) {
-                    echo '<p id="sendMailSuccess">' . $_SESSION['sendMailSuccess'] . '</p>';
-                    unset($_SESSION['sendMailSuccess']);
-                }else if(isset($_SESSION['sendMailFailed'])){
-                    echo '<p id="sendMailFailed">' . $_SESSION['sendMailFailed'] . '</p>';
-                    unset($_SESSION['sendMailFailed']);
+                if(isset($_SESSION['send_mail_failed'])){
+                    echo '<p id="send_mail_failed">' . $_SESSION['send_mail_failed'] . '</p>';
+                    unset($_SESSION['send_mail_failed']);
                 }
                 ?>
                     <label for="email">Inserisci l'e-mail</label>

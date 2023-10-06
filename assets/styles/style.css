@@ -157,16 +157,16 @@ form span a {
     
 }
 
-form #registration_success,form #registration_error,form #login_error {
+form p {
     position: absolute;
     top: 15px;
     font-weight: bold;
 }
 
-form #login_error,form #registration_error,form #sendMailFailed,form #code_error {
+form #login_error,form #registration_error,form #sendMailFailed,form #code_error,form #send_mail_failed {
     color: red;
 }
-form #registration_success,form #sendMailSuccess,form #change_password_success {
+form #registration_success,form #send_mail_success,form #change_password_success,form #send_mail_success {
     color: green;
 }
 

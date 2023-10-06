@@ -9,6 +9,7 @@ $email = $_SESSION['currentEmail'];
 
 $connection = DB::getConnection();
 
+//check email
 $query = "SELECT * FROM `utenti` WHERE email = '$email'";
 $result = $connection->query($query);
 

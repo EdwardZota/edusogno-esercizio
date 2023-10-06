@@ -20,11 +20,11 @@
             //invio mail a tutti gli attendees
             $subject = 'Creazione nuovo evento al quale fai parte';
             $message = 'Logga con il tuo account per vedere il nuovo evento';
-            $headers = 'From:'.$loggedUserEmail;
+            $headers = 'From:update@edusogno.com';
             
             ini_set("SMTP", "smtp.freesmtpservers.com");
             ini_set("smtp_port", "25"); //link per il test: https://www.wpoven.com/tools/free-smtp-server-for-testing
-            ini_set("sendmail_from", "$loggedUserEmail");
+            ini_set("sendmail_from", "update@edusogno.com");
 
             foreach($attendeesArray as $attender){
                 mail($attender,$subject,$message,$headers);

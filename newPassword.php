@@ -1,7 +1,5 @@
 <?php
-    session_start();
     require_once __DIR__ . './assets/db/DBConfig.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +30,7 @@
             <img class="left-circle" src="./assets/img/left-circle.svg" alt="left-circle">
             <img class="rocket" src="./assets/img/rocket.svg" alt="rocket">
         </div>
-        <!-- Login -->
+        <!-- new Password -->
         <div class="loginAndRegister" id="loginForm">
             <h1 class="title">Nuova Password</h1>
             <form action="./assets/db/confirmNewPassword.php" method="post">

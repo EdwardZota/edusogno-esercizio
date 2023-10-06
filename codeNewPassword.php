@@ -1,8 +1,6 @@
 <?php
     session_start();
     require_once __DIR__ . './assets/db/DBConfig.php';
-
-
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +31,7 @@
             <img class="left-circle" src="./assets/img/left-circle.svg" alt="left-circle">
             <img class="rocket" src="./assets/img/rocket.svg" alt="rocket">
         </div>
-        <!-- codice cambio password -->
+        <!-- code change password -->
         <div class="loginAndRegister" id="changePassword">
             <h1 class="title">Conferma codice di recupero!</h1>
             <form action="./assets/db/sendCodeNewPassword.php" method="post">
@@ -41,6 +39,9 @@
                     if (isset($_SESSION['code_error'])) {
                         echo '<p id="code_error">' . $_SESSION['code_error'] . '</p>';
                         unset($_SESSION['code_error']);
+                    } else if (isset($_SESSION['send_mail_success'])) {
+                        echo '<p id="send_mail_success">' . $_SESSION['send_mail_success'] . '</p>';
+                        unset($_SESSION['send_mail_success']);
                     }
                 ?>
                     <label for="code">Inserisci codice</label>

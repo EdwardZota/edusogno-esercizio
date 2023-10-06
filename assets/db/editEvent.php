@@ -24,7 +24,7 @@
             
             ini_set("SMTP", "smtp.freesmtpservers.com");
             ini_set("smtp_port", "25"); //link per il test: https://www.wpoven.com/tools/free-smtp-server-for-testing
-            ini_set("sendmail_from", "$loggedUserEmail");
+            ini_set("sendmail_from", "update@edusogno.com");
 
             foreach($attendeesArray as $attender){
                 mail($attender,$subject,$message,$headers);
