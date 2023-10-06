@@ -1,43 +1,73 @@
 <?php
+session_start();
+require_once __DIR__ . './DB.php';
 
-    session_start();
-    require_once __DIR__ . './DB.php';
+$eventId = isset($_POST['event-id']) ? $_POST['event-id'] : '';
+$newEventName = isset($_POST['event-name']) ? $_POST['event-name'] : '';
+$attendeesArea = isset($_POST['attendees']) ? $_POST['attendees'] : '';
+$attendees = $loggedUserEmail . ',' . $attendeesArea;
+$loggedUserEmail = $_SESSION['userEmail'];
+$attendeesArray = explode(',', $attendees);
 
-    $eventId = $_POST['event-id'];
-    $newEventName = $_POST['event-name'];
-    $attendees = $_POST['attendees'];
-    $loggedUserEmail = $_SESSION['userEmail'];
-    $attendeesArray = explode(',',$attendees);
+//validation
 
-    $connection = DB::getConnection();
+if (empty($newEventName) || empty($attendees)) {
+    $fail = true;
+    $_SESSION['edit_event_error'] = 'Riempi tutti i campi.';
+} else if (!preg_match("/^[a-zA-z]*$/", $newEventName)) {
+    $fail = true;
+    $_SESSION['edit_event_error'] = 'Il campo nome evento non è valido.';
+}
 
-    $query = "SELECT * FROM `eventi` WHERE `id` = '$eventId'";
+$pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";
+foreach ($attendeesArray as $attender) {
+    if (!preg_match($pattern, $attender)) {
+        $fail = true;
+        $_SESSION['edit_event_error'] = 'Nel campo dei partecipanti la mail:' . $attender . ' , non è valida.';
+    }
+    $query = "SELECT * FROM `utenti` WHERE email = '$attender'";
 
-    if($connection->query($query)->num_rows == 1){
-        $query = "UPDATE `eventi` SET `attendees` = '$attendees', `nome_evento` = '$newEventName' WHERE `id` = '$eventId'";
-        if($connection->query($query)){
+    if (!$connection->query($query)) {
+        $fail = true;
+        $_SESSION['edit_event_error'] = 'Nel campo dei partecipanti la mail:' . $attender . ' , non esiste.';
+    }
+}
 
-            //invio mail a tutti gli attendees
-            $subject = 'Modifica evento al quale fai parte';
-            $message = 'Logga con il tuo account per vedere le modifiche effettuate';
-            $headers = 'From:'.$loggedUserEmail;
-            
-            ini_set("SMTP", "smtp.freesmtpservers.com");
-            ini_set("smtp_port", "25"); //link per il test: https://www.wpoven.com/tools/free-smtp-server-for-testing
-            ini_set("sendmail_from", "update@edusogno.com");
+if ($fail) {
+    $connection->close();
+    header("Location: ../../events/create.php");
+    exit;
+}
 
-            foreach($attendeesArray as $attender){
-                mail($attender,$subject,$message,$headers);
-            }
+//end validation
+$connection = DB::getConnection();
 
-            $_SESSION['edit_event_success'] = 'Evento aggiornato con successo.';
-            $connection->close();
-            header("location: ../../index.php");
-            exit;
+$query = "SELECT * FROM `eventi` WHERE `id` = '$eventId'";
+
+if ($connection->query($query)->num_rows == 1) {
+    $query = "UPDATE `eventi` SET `attendees` = '$attendees', `nome_evento` = '$newEventName' WHERE `id` = '$eventId'";
+    if ($connection->query($query)) {
+
+        //invio mail a tutti gli attendees
+        $subject = 'Modifica evento al quale fai parte';
+        $message = 'Logga con il tuo account per vedere le modifiche effettuate';
+        $headers = 'From:' . $loggedUserEmail;
+
+        ini_set("SMTP", "smtp.freesmtpservers.com");
+        ini_set("smtp_port", "25"); //link per il test: https://www.wpoven.com/tools/free-smtp-server-for-testing
+        ini_set("sendmail_from", "update@edusogno.com");
+
+        foreach ($attendeesArray as $attender) {
+            mail($attender, $subject, $message, $headers);
         }
-    }else{
-        $_SESSION['edit_event_error'] = 'Esiste già un\'evento con questo nome.';
-        header("Location: ../../events/create.php");
+
+        $_SESSION['edit_event_success'] = 'Evento aggiornato con successo.';
+        $connection->close();
+        header("location: ../../index.php");
         exit;
     }
-    
+} else {
+    $_SESSION['edit_event_error'] = 'Esiste già un\'evento con questo nome.';
+    header("Location: ../../events/create.php");
+    exit;
+}

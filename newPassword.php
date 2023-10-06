@@ -10,23 +10,23 @@
 </head>
 
 <body>
-<?php include './layout/header.php' ?>
+    <?php include './layout/header.php' ?>
 
-<main>
-    <?php include './layout/background.php' ?>
+    <main>
+        <?php include './layout/background.php' ?>
         <!-- new Password -->
         <div class="loginAndRegister" id="loginForm">
             <h1 class="title">Nuova Password</h1>
             <form action="./assets/db/confirmNewPassword.php" method="post">
 
-                    <label for="password">Inserisci la nuova password</label>
-                    <input type="password" id="password" name="password" placeholder="Scrivila qui" required>
-                    <div class="eye" id="eyeNewPassword">
-                        <img src="./assets/img/eye.svg" alt="eye">
-                    </div>
-                    
-                    <button type="submit">Conferma nuova password</button>
-                </form>
+                <label for="password">Inserisci la nuova password</label>
+                <input type="password" id="password" name="password" placeholder="Scrivila qui" required>
+                <div class="eye" id="eyeNewPassword">
+                    <img src="./assets/img/eye.svg" alt="eye">
+                </div>
+
+                <button type="submit">Conferma nuova password</button>
+            </form>
         </div>
     </main>
 

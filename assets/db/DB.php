@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //definisco le credenziali del DB
 define('db_servername', 'localhost');
@@ -9,20 +9,22 @@ define('db_port', 3306);
 
 class DB
 {
-    static public function getConnection(){
-        
+    static public function getConnection()
+    {
+
 
         //mi connetto  ad DB
         $connection = new mysqli(db_servername, db_username, db_password, db_name, db_port);
 
-        if ($connection && $connection->connect_error){
+        if ($connection && $connection->connect_error) {
             echo $connection->connect_error;
         };
 
         return $connection;
     }
 
-    static public function Migration($path){
+    static public function Migration($path)
+    {
 
         //controllo l'esistenza della tabella
         $connection = DB::getConnection();
@@ -30,22 +32,21 @@ class DB
         $tableExists = $connection->query($checkTableQuery);
 
         //se non esiste viene eseguita la migration
-        if(!$tableExists->num_rows > 0){
+        if (!$tableExists->num_rows > 0) {
             $queries = file($path);
             $query = '';
-    
-            foreach ($queries as $line){
+
+            foreach ($queries as $line) {
                 $query .= $line;
                 //controllo fine query
-                $endLine = substr(trim($line),-1);
+                $endLine = substr(trim($line), -1);
 
-                if($endLine == ';'){
+                if ($endLine == ';') {
                     $connection->query($query);
                     $query = '';
                 }
             }
         }
         $connection->close();
-        
     }
 }
