@@ -19,6 +19,7 @@ header {
     width: 120px;
 }
 
+/* nav */
 #nav{
     display: flex;
     justify-content: space-between;
@@ -31,12 +32,18 @@ header {
     height: 100%;
 }
 
-main{
-    position: relative;
-    height: calc(100vh - 121px);
+#nav #logoutButton {
+    right: 50px;
 }
 
-/* inizio background */
+#nav #eventsButton {
+    right: 180px;
+}
+#nav #createNewButton {
+    right: 310px;
+}
+
+/* background */
 
 .bg-container {
     height: 100%;
@@ -83,7 +90,18 @@ main{
     right: 50px;
 }
 
-/* fine background / inizio card login/registrazione*/
+/* login/registrazione*/
+
+main{
+    position: relative;
+    height: calc(100vh - 121px);
+}
+
+.title {
+    text-align: center;
+    margin-top: 60px;
+    color: #134077;
+}
 
 .loginAndRegister {
     width: 50%;
@@ -91,12 +109,6 @@ main{
     position: absolute;
     top: 5%;
     left: 25%;
-}
-
-.title {
-    text-align: center;
-    margin-top: 60px;
-    color: #134077;
 }
 
 .loginAndRegister form {
@@ -148,19 +160,12 @@ form button, #eventsBox button, #nav button{
     align-items: center;
     width: 100%;
 }
-#nav #logoutButton,#nav #eventsButton{
+#nav #logoutButton,#nav #eventsButton,#nav #createNewButton{
     position: absolute;
     top: 35px;
     width: 110px;
 }
 
-#nav #logoutButton{
-    right: 49px;
-}
-
-#nav #eventsButton{
-    right: 180px;
-}
 
 form button,#eventsBox button{
     margin-top: 16px;
@@ -219,7 +224,7 @@ form textarea{
 }
 
 
-/* fine card login/registrazione / inizio eventsCard */
+/* eventsCard */
 
 #events {
     width: 100vw;
@@ -257,9 +262,5 @@ form textarea{
     color: #dfdfdf;
 }
 
-#createNewButton{
-    position: absolute;
-    top: 0;
-    right: 16%;
-}
+
 

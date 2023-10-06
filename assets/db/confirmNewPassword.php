@@ -3,9 +3,28 @@
 session_start();
 require_once __DIR__ . './DB.php';
 
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$Passwordlength = strlen($password);
 
-$new_hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$new_hashed_password = password_hash($password, PASSWORD_DEFAULT);
 $email = $_SESSION['currentEmail'];
+
+//validation
+
+if (empty($password)) {
+    $fail = true;
+    $_SESSION['confirm_new_password_error'] = 'password non inserita.';
+} else if ($Passwordlength < 4 && $Passwordlength > 20) {
+    $fail = true;
+    $_SESSION['confirm_new_password_error'] = 'La password deve essere tra i 4 e i 20 caratteri.';
+}
+
+if ($fail) {
+    header("Location: ../../newPassword.php");
+    exit;
+}
+
+// end validation
 
 $connection = DB::getConnection();
 
