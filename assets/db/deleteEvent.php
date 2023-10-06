@@ -4,8 +4,8 @@
 
     $eventId = $_POST['event-id'];
 
-    $connection = DB::getConnection();
 
+    $connection = DB::getConnection();
 
     $query = "SELECT * FROM `eventi` WHERE `id` = '$eventId'";
 
@@ -18,3 +18,4 @@
             exit;
         }
     }
+    $connection->close();

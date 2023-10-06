@@ -20,26 +20,20 @@
 </head>
 
 <body>
-    <header>
-        <div id="nav">
-            <div class="logo">
-                <img src="../assets/img/logo.svg" alt="logo">
-            </div>
-        </div>
-    </header>
-    <main>
-        <div class="bg-container">
-            <img class="right-circle" src="../assets/img/right-circle.svg" alt="right-circle">
-            <img class="wave3" src="../assets/img/wave3.svg" alt="wave3">
-            <img class="wave2" src="../assets/img/wave2.svg" alt="wave2">
-            <img class="wave1" src="../assets/img/wave1.svg" alt="wave1">
-            <img class="left-circle" src="../assets/img/left-circle.svg" alt="left-circle">
-            <img class="rocket" src="../assets/img/rocket.svg" alt="rocket">
-        </div>
+<?php include '../layout/headerIntoFolder.php' ?>
+
+<main>
+    <?php include '../layout/backgroundIntoFolder.php' ?>
         <!-- Login -->
         <div class="loginAndRegister" id="loginForm">
             <h1 class="title">Crea un nuovo evento!</h1>
             <form action="../assets/db/newEvent.php" method="post">
+                <?php
+                    if (isset($_SESSION['new_event_error'])) {
+                        echo '<p id="new_event_error">' . $_SESSION['new_event_error'] . '</p>';
+                        unset($_SESSION['new_event_error']);
+                    }
+                ?>
                     <label for="event-name">Inserisci nome evento</label>
                     <input type="text" id="event-name" name="event-name" placeholder="edusogno evento" required>
 

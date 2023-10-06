@@ -28,25 +28,10 @@
 </head>
 
 <body>
-    <header>
-        <div id="nav">
-            <div class="logo">
-                <img src="./assets/img/logo.svg" alt="logo">
-            </div>
-            <div>
-                <a href="./assets/db/Logout.php"><button>LOGOUT</button></a>
-            </div>
-        </div>
-    </header>
+    <?php include './layout/header.php' ?>
+
     <main>
-        <div class="bg-container">
-            <img class="right-circle" src="./assets/img/right-circle.svg" alt="right-circle">
-            <img class="wave3" src="./assets/img/wave3.svg" alt="wave3">
-            <img class="wave2" src="./assets/img/wave2.svg" alt="wave2">
-            <img class="wave1" src="./assets/img/wave1.svg" alt="wave1">
-            <img class="left-circle" src="./assets/img/left-circle.svg" alt="left-circle">
-            <img class="rocket" src="./assets/img/rocket.svg" alt="rocket">
-        </div>
+        <?php include './layout/background.php' ?>
         <div id="events">
             <h1 class="title">Ciao <?php echo $loggedUser ?> ecco i tuoi eventi</h1>
             <div id="eventsBox">
@@ -57,7 +42,7 @@
                  foreach($events as $event) { ?>
                     <div class="eventsCard">
                         <h2><?php echo $event->nome_evento; ?></h2>
-                        <p><?php echo $event->data_evento; ?></p>
+                        <p id="date"><?php echo $event->data_evento; ?></p>
                         <a href="./events/show.php?event-name=<?php echo $event->nome_evento ?>"><button>JOIN</button></a>
                         <a href="./events/edit.php?event-name=<?php echo $event->nome_evento ?>"><button>EDIT</button></a>
                         <form action="./assets/db/deleteEvent.php" method="post">

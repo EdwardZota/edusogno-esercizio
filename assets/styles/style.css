@@ -150,7 +150,7 @@ form button, #eventsBox button, #nav button{
 }
 
 
-#eventsBox button {
+form button,#eventsBox button{
     margin-top: 16px;
 }
 
@@ -189,7 +189,7 @@ form p {
     font-weight: bold;
 }
 
-form #login_error,form #registration_error,form #sendMailFailed,form #code_error,form #send_mail_failed {
+form #login_error,form #registration_error,form #new_event_error,form #sendMailFailed,form #code_error,form #send_mail_failed {
     color: red;
 }
 form #registration_success,form #send_mail_success,form #change_password_success,form #send_mail_success {
@@ -232,13 +232,18 @@ form textarea{
     border: 1px solid #134077;
     border-radius: 18px;
     position: relative;
+    transition: 0.3s ease-out 100ms;
+}
+
+.eventsCard:hover {
+    scale: 1.05;
+    box-shadow: 0px 10px 10px #134077;
 }
 
 .eventsCard #date {
     margin: 8px 0;
     color: #dfdfdf;
 }
-
 
 #createNewButton{
     position: absolute;

@@ -1,7 +1,3 @@
-<?php
-    require_once __DIR__ . './assets/db/DBConfig.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,22 +10,10 @@
 </head>
 
 <body>
-    <header>
-        <div id="nav">
-            <div class="logo">
-                <img src="./assets/img/logo.svg" alt="logo">
-            </div>
-        </div>
-    </header>
-    <main>
-        <div class="bg-container">
-            <img class="right-circle" src="./assets/img/right-circle.svg" alt="right-circle">
-            <img class="wave3" src="./assets/img/wave3.svg" alt="wave3">
-            <img class="wave2" src="./assets/img/wave2.svg" alt="wave2">
-            <img class="wave1" src="./assets/img/wave1.svg" alt="wave1">
-            <img class="left-circle" src="./assets/img/left-circle.svg" alt="left-circle">
-            <img class="rocket" src="./assets/img/rocket.svg" alt="rocket">
-        </div>
+<?php include './layout/header.php' ?>
+
+<main>
+    <?php include './layout/background.php' ?>
         <!-- new Password -->
         <div class="loginAndRegister" id="loginForm">
             <h1 class="title">Nuova Password</h1>

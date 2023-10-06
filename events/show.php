@@ -32,25 +32,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edusogno</title>
     <link rel="stylesheet" href="../assets/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-    <header>
-        <div id="nav">
-            <div class="logo">
-                <img src="../assets/img/logo.svg" alt="logo">
-            </div>
-        </div>
-    </header>
-    <main>
-        <div class="bg-container">
-            <img class="right-circle" src="../assets/img/right-circle.svg" alt="right-circle">
-            <img class="wave3" src="../assets/img/wave3.svg" alt="wave3">
-            <img class="wave2" src="../assets/img/wave2.svg" alt="wave2">
-            <img class="wave1" src="../assets/img/wave1.svg" alt="wave1">
-            <img class="left-circle" src="../assets/img/left-circle.svg" alt="left-circle">
-            <img class="rocket" src="../assets/img/rocket.svg" alt="rocket">
-        </div>
+<?php include '../layout/headerIntoFolder.php' ?>
+
+<main>
+    <?php include '../layout/backgroundIntoFolder.php' ?>
         <div id="events">
             <h1 class="title">Dettagli Evento</h1>
             <div id="eventsBox">
@@ -63,6 +52,11 @@
                                 <p><?php echo $attender ?></p>
                             </div>
                         <?php } ?>
+                        <a href="../events/edit.php?event-name=<?php echo $event['nome_evento'] ?>"><button>EDIT</button></a>
+                        <form action="../assets/db/deleteEvent.php" method="post">
+                            <input type="hidden" name="event-id" value="<?php echo $event['id'] ?>">
+                            <button type="submit" id="deleteEvent"><i class="fa-solid fa-xmark"></i></button>
+                        </form>
                     </div>
             </div>
         </div>
