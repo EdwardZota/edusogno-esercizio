@@ -12,12 +12,14 @@
         $eventName = $_GET['event-name'];
 
         $event = Events::show($eventName);
-        $attendeesArray = explode(',',$event['attendees']);
+        if($event){
+            $attendeesArray = explode(',',$event['attendees']);
+        }else{
+            echo "<h1>Pagina non trovata. Torna alla <a href='../index.php'>pagina principale</a>.</h1>";
+            exit;
+        }
 
 
-    }else{
-        echo "<h1>Pagina non trovata. Torna alla <a href='../index.php'>pagina principale</a>.</h1>";
-        exit;
     } 
 
 ?>

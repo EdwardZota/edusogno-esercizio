@@ -148,7 +148,19 @@ form button, #eventsBox button, #nav button{
     align-items: center;
     width: 100%;
 }
+#nav #logoutButton,#nav #eventsButton{
+    position: absolute;
+    top: 35px;
+    width: 110px;
+}
 
+#nav #logoutButton{
+    right: 49px;
+}
+
+#nav #eventsButton{
+    right: 180px;
+}
 
 form button,#eventsBox button{
     margin-top: 16px;

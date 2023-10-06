@@ -13,10 +13,10 @@
         $eventName = $_GET['event-name'];
 
         $event = Events::show($eventName);
-
-    }else{
-        echo "<h1>Pagina non trovata. Torna alla <a href='../index.php'>pagina principale</a>.</h1>";
-        exit;
+        if($event === null){
+            echo "<h1>Pagina non trovata. Torna alla <a href='../index.php'>pagina principale</a>.</h1>";
+            exit;
+        }
     } 
 ?>
 

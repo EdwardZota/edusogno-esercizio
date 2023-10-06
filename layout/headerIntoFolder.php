@@ -1,3 +1,12 @@
+<?php
+
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+$showLogoutButton = true;
+    }else{
+        $showLogoutButton = false;
+    }
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +25,12 @@
             <div class="logo">
                 <img src="../assets/img/logo.svg" alt="logo">
             </div>
+            <?php if($showLogoutButton){ ?>
             <div>
+                <a href="../index.php"><button id="eventsButton">EVENTI</button></a>
                 <a href="../assets/db/Logout.php"><button>LOGOUT</button></a>
             </div>
+            <?php } ?>
         </div>
     </header>
 </body>
