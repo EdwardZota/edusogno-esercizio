@@ -2,10 +2,10 @@
     session_start();
     require_once __DIR__ . './DB.php';
 
-    $eventName = $_POST['event-name'];
-    $attendees = $_POST['attendees'];
-    $date = date("Y-m-d H:i:s"); 
     $loggedUserEmail = $_SESSION['userEmail'];
+    $eventName = $_POST['event-name'];
+    $attendees = $loggedUserEmail . ',' . $_POST['attendees'];
+    $date = date("Y-m-d H:i:s"); 
     $attendeesArray = explode(',',$attendees);
     $connection = DB::getConnection();
 

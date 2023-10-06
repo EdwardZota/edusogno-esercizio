@@ -9,10 +9,10 @@
         header("location: ./login.php");
         exit;
     }else{
-        $loggedUser = $_SESSION['logged_user'];
+        $loggedUser = ucfirst(strtolower($_SESSION['logged_user'])) ;
     }
-
-    $events = Events::getEvents();
+    $userEmail = $_SESSION['userEmail'];
+    $events = Events::getEvents($userEmail);
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edusogno</title>
     <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -31,6 +32,9 @@
         <div id="nav">
             <div class="logo">
                 <img src="./assets/img/logo.svg" alt="logo">
+            </div>
+            <div>
+                <a href="./assets/db/Logout.php"><button>LOGOUT</button></a>
             </div>
         </div>
     </header>
@@ -47,7 +51,10 @@
             <h1 class="title">Ciao <?php echo $loggedUser ?> ecco i tuoi eventi</h1>
             <div id="eventsBox">
                 <a href="./events/create.php" id="createNewButton"><button>CREATE</button></a>
-                <?php foreach($events as $event) { ?>
+                <?php if (empty($events)) { ?>
+                    <h1>Non ci sono eventi ai quale fai parte.</h1>
+                <?php   } else {
+                 foreach($events as $event) { ?>
                     <div class="eventsCard">
                         <h2><?php echo $event->nome_evento; ?></h2>
                         <p><?php echo $event->data_evento; ?></p>
@@ -55,11 +62,11 @@
                         <a href="./events/edit.php?event-name=<?php echo $event->nome_evento ?>"><button>EDIT</button></a>
                         <form action="./assets/db/deleteEvent.php" method="post">
                             <input type="hidden" name="event-id" value="<?php echo $event->id ?>">
-                            <button>DELETE</button></a>
+                            <button type="submit" id="deleteEvent"><i class="fa-solid fa-xmark"></i></button>
                         </form>
                     </div>
-                <?php } ?>
-                
+                <?php } 
+                } ?>
             </div>
         </div>
         

@@ -33,10 +33,8 @@ if($result->num_rows === 1){
     }
 
 }else{
-    // Credenziali non valide, memorizza il messaggio di errore nella variabile di sessione
     $_SESSION['login_error'] = "l'email inserita non e valida";
 
-    // Reindirizza alla pagina di login
     header("Location: ../../login.php");
     exit;
 }

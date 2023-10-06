@@ -17,9 +17,10 @@ class Events {
     }
 
 
-    static public function getEvents(){
+    static public function getEvents($userEmail){
         $connection = DB::getConnection();
-        $query = "SELECT * FROM `eventi`";
+        $userEmail = $connection->real_escape_string($userEmail);
+        $query = "SELECT * FROM `eventi` WHERE FIND_IN_SET('$userEmail', attendees) > 0";
         $result  = $connection->query($query);
         $events = [];
         $connection->close();
