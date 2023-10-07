@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . './DB.php';
 
 $code = isset($_POST['code']) ? $_POST['code'] : '';
-$email = isset($_POST['currentEmail']) ? $_POST['currentEmail'] : '';
+$email = $_SESSION['currentEmail'];
 
 $connection = DB::getConnection();
 
@@ -14,12 +14,12 @@ $result = $connection->query($query);
 
 //validation
 $length = strlen($code);
+$fail = false;
 
 if (empty($code)) {
     $fail = true;
     $_SESSION['code_error'] = 'Nessun codice inserito.';
-
-} else if ((!preg_match("/^[0-9]*$/", $code) || ($length < 10 && $length > 10))) {
+} else if ((!preg_match("/^[0-9]*$/", $code) || ($length < 6 && $length > 6))) {
     $fail = true;
     $_SESSION['code_error'] = 'Codice inserito non valido.';
 }
@@ -30,7 +30,6 @@ if ($fail) {
     exit;
 }
 //end validation
-
 
 if ($result->num_rows === 1) {
     //Fetches one row of data from the result set and returns it as an associative array

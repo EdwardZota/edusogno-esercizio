@@ -8,6 +8,7 @@ $email = isset($_POST['email']) ? $_POST['email'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 
 //validation
+$fail = false;
 $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";
 
 if (empty($email) || empty($password)) {
@@ -37,13 +38,15 @@ if ($result->num_rows === 1) {
 
     $row = $result->fetch_assoc();
     $user = $row['nome'];
-    $userEmail = $row['email'];
+    $user_email = $row['email'];
     $db_hashed_password = $row['password'];
+    $admin_permiss = $row['permessi_admin'];
 
     if (password_verify($password, $db_hashed_password)) {
         $_SESSION['logged_in'] = true;
         $_SESSION['logged_user'] = $user;
-        $_SESSION['userEmail'] = $userEmail;
+        $_SESSION['user_email'] = $user_email;
+        $_SESSION['admin_permiss'] = $admin_permiss;
         header("location: ../../index.php");
         exit;
     } else {

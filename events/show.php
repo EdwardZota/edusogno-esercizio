@@ -20,6 +20,8 @@ if (isset($_GET['event-name'])) {
     }
 }
 
+$adminPermiss = $_SESSION['admin_permiss'];
+
 ?>
 
 
@@ -52,11 +54,14 @@ if (isset($_GET['event-name'])) {
                             <p><?php echo $attender ?></p>
                         </div>
                     <?php } ?>
-                    <a href="../events/edit.php?event-name=<?php echo $event['nome_evento'] ?>"><button>EDIT</button></a>
-                    <form action="../assets/db/deleteEvent.php" method="post">
-                        <input type="hidden" name="event-id" value="<?php echo $event['id'] ?>">
-                        <button type="submit" id="deleteEvent"><i class="fa-solid fa-xmark"></i></button>
-                    </form>
+
+                    <?php if ($adminPermiss == true) { ?>
+                        <a href="../events/edit.php?event-name=<?php echo $event['nome_evento'] ?>"><button>EDIT</button></a>
+                        <form action="../assets/db/deleteEvent.php" method="post">
+                            <input type="hidden" name="event-id" value="<?php echo $event['id'] ?>">
+                            <button type="submit" id="deleteEvent"><i class="fa-solid fa-xmark"></i></button>
+                        </form>
+                    <?php } ?>
                 </div>
             </div>
         </div>

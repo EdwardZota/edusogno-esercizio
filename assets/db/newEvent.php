@@ -2,45 +2,50 @@
 session_start();
 require_once __DIR__ . './DB.php';
 
-$loggedUserEmail = $_SESSION['userEmail'];
+$loggedUserEmail = $_SESSION['user_email'];
 $eventName = isset($_POST['event-name']) ? $_POST['event-name'] : '';
 $attendeesArea = isset($_POST['attendees']) ? $_POST['attendees'] : '';
-$attendees = $loggedUserEmail . ',' . $attendeesArea;
 $date = date("Y-m-d H:i:s");
+
+$attendees = $loggedUserEmail;
+if (!empty($attendeesArea)) {
+    $attendees .= ',' . $attendeesArea;
+}
+
+if (substr($attendees, -1) === '.' || substr($attendees, -1) === ',') {
+    $attendees = substr($attendees, 0, -1);
+}
 $attendeesArray = explode(',', $attendees);
+
 
 $connection = DB::getConnection();
 
 //validation
+$fail = false;
 
 if (empty($eventName) || empty($attendees)) {
-    $connection->close();
+    $fail = true;
     $_SESSION['new_event_error'] = 'Riempi tutti i campi.';
-    header("Location: ../../events/create.php");
-    exit;
-} else if (!preg_match("/^[a-zA-z]*$/", $eventName)) {
-    $connection->close();
-    $_SESSION['new_event_error'] = 'Il campo nome evento non è valido.';
-    header("Location: ../../events/create.php");
-    exit;
 }
 
-$pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";
-foreach ($attendeesArray as $attender) {
-    if (!preg_match($pattern, $attender)) {
-        $connection->close();
-        $_SESSION['new_event_error'] = 'Nel campo dei partecipanti la mail:' . $attender . ' , non è valida.';
-        header("Location: ../../events/create.php");
-        exit;
-    }
-    $query = "SELECT * FROM `utenti` WHERE email = '$attender'";
+if (count($attendeesArray) > 0) {
+    $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";
+    foreach ($attendeesArray as $attender) {
+        if (!preg_match($pattern, $attender)) {
+            $_SESSION['new_event_error'] = 'Nel campo dei partecipanti la mail:' . $attender . ' , non è valida.';
+        }
+        $query = "SELECT * FROM `utenti` WHERE email = '$attender'";
 
-    if (!$connection->query($query)) {
-        $connection->close();
-        $_SESSION['new_event_error'] = 'Nel campo dei partecipanti la mail:' . $attender . ' , non esiste.';
-        header("Location: ../../events/create.php");
-        exit;
+        if (!$connection->query($query)) {
+            $_SESSION['new_event_error'] = 'Nel campo dei partecipanti la mail:' . $attender . ' , non esiste.';
+        }
     }
+}
+
+if ($fail) {
+    $connection->close();
+    header("Location: ../../events/create.php");
+    exit;
 }
 //end validation
 

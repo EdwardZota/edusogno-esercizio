@@ -206,7 +206,7 @@ form p {
     font-weight: bold;
 }
 
-form #login_error,form #registration_error,form #new_event_error,form #sendMailFailed,form #code_error,form #send_mail_failed {
+form #login_error,form #registration_error,form #new_event_error,form #sendMailFailed,form #code_error,form #send_mail_failed,form #edit_event_error {
     color: red;
 }
 form #registration_success,form #send_mail_success,form #change_password_success,form #send_mail_success {

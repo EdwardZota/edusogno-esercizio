@@ -17,7 +17,7 @@ $query = "SELECT * FROM `utenti` WHERE email = '$email'";
 
 //validation
 $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";
-
+$fail = false;
 if (empty($name) || empty($surname) || empty($email) || empty($password)) {
     $fail = true;
     $_SESSION['registration_error'] = 'Riempi tutti i campi.';
@@ -42,7 +42,15 @@ if ($fail) {
 // end validation
 
 if ($connection->query($query)->num_rows == 0) {
-    $query = "INSERT INTO utenti (nome, cognome, email, password) VALUES ('$name','$surname','$email','$hashed_password')";
+    //check if is first email into database
+    $query = "SELECT COUNT(*) as count FROM `utenti`";
+    $result = $connection->query($query);
+
+    if ($result->fetch_assoc()['count'] == 0) {
+        $query = "INSERT INTO utenti (nome, cognome, email, password, permessi_admin) VALUES ('$name','$surname','$email','$hashed_password',true)";
+    } else {
+        $query = "INSERT INTO utenti (nome, cognome, email, password) VALUES ('$name','$surname','$email','$hashed_password')";
+    }
 
     if ($connection->query($query)) {
         $connection->close();

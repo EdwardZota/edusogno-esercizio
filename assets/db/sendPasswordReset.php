@@ -6,15 +6,18 @@ require_once __DIR__ . './DB.php';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 
 //validation
+$fail = false;
 $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";
 if (!preg_match($pattern, $email)) {
+    $fail = true;
     $_SESSION['send_mail_failed'] = 'E-mail inserita non è valida.';
 } else if (empty($email)) {
+    $fail = true;
     $_SESSION['send_mail_failed'] = 'Campo email non inserito.';
 }
 
 if ($fail) {
-    header("Location: ../../registration.php");
+    header("Location: ../../forgotPassword.php");
     exit;
 }
 //end validation

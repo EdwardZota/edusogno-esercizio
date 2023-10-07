@@ -11,7 +11,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 } else {
     $loggedUser = ucfirst(strtolower($_SESSION['logged_user']));
 }
-$userEmail = $_SESSION['userEmail'];
+$userEmail = $_SESSION['user_email'];
+$adminPermiss = $_SESSION['admin_permiss'];
 $events = Events::getEvents($userEmail);
 ?>
 
@@ -43,11 +44,13 @@ $events = Events::getEvents($userEmail);
                             <h2><?php echo $event->nome_evento; ?></h2>
                             <p id="date"><?php echo $event->data_evento; ?></p>
                             <a href="./events/show.php?event-name=<?php echo $event->nome_evento ?>"><button>JOIN</button></a>
+                            <?php if($adminPermiss == true) { ?>
                             <a href="./events/edit.php?event-name=<?php echo $event->nome_evento ?>"><button>EDIT</button></a>
                             <form action="./assets/db/deleteEvent.php" method="post">
                                 <input type="hidden" name="event-id" value="<?php echo $event->id ?>">
                                 <button type="submit" id="deleteEvent"><i class="fa-solid fa-xmark"></i></button>
                             </form>
+                            <?php } ?>
                         </div>
                 <?php }
                 } ?>

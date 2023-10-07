@@ -21,4 +21,8 @@ VALUES ('ulysses200915@varen8.com,qmonkey14@falixiao.com,mavbafpcmq@hitbase.net'
         ('dgipolga@edume.me,ulysses200915@varen8.com,mavbafpcmq@hitbase.net','Test Edusogno 3', '2022-10-15 19:00');
 
 
-ALTER TABLE `utenti`  ADD `codice_cambio_password` VARCHAR(6) NULL DEFAULT NULL  AFTER `password`;
+ALTER TABLE `utenti`  
+ADD `codice_cambio_password` VARCHAR(6) NULL DEFAULT NULL  AFTER `password`;
+
+ALTER TABLE `utenti`
+ADD COLUMN `permessi_admin` BOOLEAN NOT NULL DEFAULT FALSE AFTER `password`;

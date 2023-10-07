@@ -40,14 +40,20 @@ if (isset($_GET['event-name'])) {
         <div class="loginAndRegister" id="loginForm">
             <h1 class="title">Modifica evento!</h1>
             <form action="../assets/db/editEvent.php" method="post">
+            <?php
+                if (isset($_SESSION['edit_event_error'])) {
+                    echo '<p id="edit_event_error">' . $_SESSION['edit_event_error'] . '</p>';
+                    unset($_SESSION['edit_event_error']);
+                }
+                ?>
                 <input type="hidden" name="event-id" value="<?php echo $event['id'] ?>">
+                <input type="hidden" name="old-event-name" value="<?php echo $event['nome_evento'] ?>">
 
                 <label for="event-name">Modifica nome evento</label>
                 <input type="text" id="event-name" name="event-name" value="<?php echo $event['nome_evento'] ?>" placeholder="edusogno evento" required>
 
                 <label for="attendees">Modifica le mail di chi puo partecipare all'evento</label>
-                <textarea id="attendees" name="attendees" placeholder="esempio1@gmail.com,esempio2@gmail.com,esempio3@gmail.com"><?php echo $event['attendees'] ?>
-                    </textarea>
+                <textarea id="attendees" name="attendees" placeholder="esempio1@gmail.com,esempio2@gmail.com,esempio3@gmail.com"><?php echo $event['attendees'] ?></textarea>
 
                 <button type="submit">SALVA MODIFICHE</button>
 

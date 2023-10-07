@@ -5,6 +5,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 } else {
     $showLogoutButton = false;
 }
+$adminPermiss = $_SESSION['admin_permiss'];
 
 ?>
 
@@ -26,8 +27,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 <img src="../assets/img/logo.svg" alt="logo">
             </div>
             <?php if ($showLogoutButton) { ?>
-                <div>                    
-                    <a href="./events/create.php" id="createNewButton"><button>CREATE</button></a>
+                <div>
+                    <?php if ($adminPermiss == true) { ?>
+                        <a href="../events/create.php" id="createNewButton"><button>CREATE</button></a>
+                    <?php } ?>
                     <a href="../index.php"><button id="eventsButton">EVENTI</button></a>
                     <a href="../assets/db/Logout.php"><button>LOGOUT</button></a>
                 </div>
