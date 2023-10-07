@@ -23,7 +23,7 @@ if (empty($name) || empty($surname) || empty($email) || empty($password)) {
     $_SESSION['registration_error'] = 'Riempi tutti i campi.';
 } else if ((!preg_match("/^[a-zA-z]*$/", $name)) || (!preg_match("/^[a-zA-z]*$/", $surname))) {
     $fail = true;
-    $_SESSION['registration_error'] = 'Nel campo nome e cognome si accettano solo lettere e spazi vuoti.';
+    $_SESSION['registration_error'] = 'Nel campo nome e cognome si accettano solo lettere.';
 } else if (!preg_match($pattern, $email)) {
     $fail = true;
     $_SESSION['registration_error'] = 'Nel campo dell\'email si accettano solo email.';

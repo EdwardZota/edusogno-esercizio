@@ -26,6 +26,9 @@ $fail = false;
 if (empty($eventName) || empty($attendees)) {
     $fail = true;
     $_SESSION['new_event_error'] = 'Riempi tutti i campi.';
+}else if (!preg_match('/^[a-zA-Z0-9 ]+$/', $eventName)) {
+    $fail = true;
+    $_SESSION['new_event_error'] = 'Il nome dell\'evento deve contenere solo lettere e numeri.';
 }
 
 if (count($attendeesArray) > 0) {
