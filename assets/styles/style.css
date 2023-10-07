@@ -32,6 +32,12 @@ header {
     height: 100%;
 }
 
+#nav #logoutButton,#nav #eventsButton,#nav #createNewButton,#nav #adminPermissionButton{
+    position: absolute;
+    top: 35px;
+    width: 110px;
+}
+
 #nav #logoutButton {
     right: 50px;
 }
@@ -41,6 +47,11 @@ header {
 }
 #nav #createNewButton {
     right: 310px;
+}
+
+#nav #adminPermissionButton{
+    right: 440px;
+    width: 300px;
 }
 
 /* background */
@@ -160,12 +171,6 @@ form button, #eventsBox button, #nav button{
     align-items: center;
     width: 100%;
 }
-#nav #logoutButton,#nav #eventsButton,#nav #createNewButton{
-    position: absolute;
-    top: 35px;
-    width: 110px;
-}
-
 
 form button,#eventsBox button{
     margin-top: 16px;

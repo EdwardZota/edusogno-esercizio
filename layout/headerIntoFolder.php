@@ -29,6 +29,7 @@ $adminPermiss = $_SESSION['admin_permiss'];
             <?php if ($showLogoutButton) { ?>
                 <div>
                     <?php if ($adminPermiss == true) { ?>
+                        <a href="../adminPermission.php" id="adminPermissionButton"><button>ADMIN PERMISSION</button></a>
                         <a href="../events/create.php" id="createNewButton"><button>CREATE</button></a>
                     <?php } ?>
                     <a href="../index.php"><button id="eventsButton">EVENTI</button></a>
